@@ -83,6 +83,34 @@ services:
     ports:
       - "1337:1337"
 
+  adder:
+    container_name: adder
+    build: ./adder
+    networks:
+      - kong-network
+    ports:
+      - "8081:8080"
+    restart: on-failure
+
+  subtractor:
+    container_name: subtractor
+    build: ./subtractor
+    networks:
+      - kong-network
+    ports:
+      - "8082:8080"
+    restart: on-failure
+
+  state:
+    container_name: state
+    build: ./state
+    networks:
+      - kong-network
+    ports:
+      - "8083:8080"
+    restart: on-failure
+
+
 volumes:
   kong-database-data:
     driver: local
